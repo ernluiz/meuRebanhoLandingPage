@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "./button/button";
 
-const AUTH_TOKEN = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFkYzBmMTcyZThkNmVmMzgyZDZkM2EyMzFmNmMxOTdkZDY4Y2U1ZWYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiNjE4MTA0NzA4MDU0LTlyOXMxYzRhbGczNmVybGl1Y2hvOXQ1Mm4zMm42ZGdxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNjE4MTA0NzA4MDU0LTlyOXMxYzRhbGczNmVybGl1Y2hvOXQ1Mm4zMm42ZGdxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyMTQyMDY2NTk3NzIxNTEyNDE1IiwiaGQiOiJtaW5oYS5mYWcuZWR1LmJyIiwiZW1haWwiOiJsZmVybkBtaW5oYS5mYWcuZWR1LmJyIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiI4bkVobE4zcHg3LTB3TWpqdDlHZGtRIiwibmJmIjoxNzMxNjI4NzIxLCJpYXQiOjE3MzE2MjkwMjEsImV4cCI6MTczMTYzMjYyMSwianRpIjoiMjViMjQ5ZjE3MWIxNTA2YmI1Y2RiOTU0MDQ1ZWJmZjFlMTliYTIyMCJ9.Ba8DDDi8rSZ5XnR-3225MpTnrlxo5Q9JuiYWAsYl2NroMvAAEgPkckKv2hYUme-AhGEsT7Bn1PObr54wXrntDzi0VwAIbPyH-rk6Ez-QOafNccqAQb5Cwh-YrO7ud4SnIxJ5um_GowcGJbIvK2bmfy9DL5JSVqFfEYwXH0iIOr74CjSA7NWv6BVSNSChOiG8dVLzghysLIoGkcRLPv1J2AC42XGF04szixwn9vUEiYqGl953rmNyqsgM2poP8MHyM0EBlhaoUUVzy15b6ws9uYo6w6pkXqXIYwsPmKshHsdMOOp7g96qo356Zvy3SGZ2aS1OOPFOqwMaby-ha9w3Lw";
+const AUTH_TOKEN = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFkYzBmMTcyZThkNmVmMzgyZDZkM2EyMzFmNmMxOTdkZDY4Y2U1ZWYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiNjE4MTA0NzA4MDU0LTlyOXMxYzRhbGczNmVybGl1Y2hvOXQ1Mm4zMm42ZGdxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNjE4MTA0NzA4MDU0LTlyOXMxYzRhbGczNmVybGl1Y2hvOXQ1Mm4zMm42ZGdxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyMTQyMDY2NTk3NzIxNTEyNDE1IiwiaGQiOiJtaW5oYS5mYWcuZWR1LmJyIiwiZW1haWwiOiJsZmVybkBtaW5oYS5mYWcuZWR1LmJyIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJZcjFQZURFbUFnbXJFU1VyNHdNNUhRIiwibmJmIjoxNzMxNjM3NDQ4LCJpYXQiOjE3MzE2Mzc3NDgsImV4cCI6MTczMTY0MTM0OCwianRpIjoiY2FlMWY3MTkyZWFkYzRjMGUyZjUwNWFkMTcxZTc3ZTIyYTQ4NDRlMSJ9.2PJ0k5eWKymNw75hkB0LFqRG3uf2JxiwjHnAkhUsbDqHypzwZseTC9bITzLNZWk_LaOfnlfikjmxYYMURte10mwzj5-5vvVCJ5T3FuUTziPn39rhaUAhDtLDSbRuH3-Bw7i-J1KXPvUzQXeEQCHOwifRh8roICSxceq1iJseINpt9PogKI-z7Wxcg6QUGEL_76A_STY58CPg-7BgQwq7XWboeFhYsuT8wM1M2shIn7x-oqJhWkfrC470utnQNhoMajwPy8W8XzzhLEIb0z9ssr0NYHiDRBiSgmf9oHlXeXZR1HUt-FBOUQbq7xqaFVtbrjmawER6WBqxxzTYb-Asww";
 
 const ContactForm: React.FC = () => {
     const [email, setEmail] = useState("");
@@ -16,16 +16,9 @@ const ContactForm: React.FC = () => {
             return;
         }
 
-        const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        if (!isValidEmail) {
-            alert("Por favor, insira um e-mail válido.");
-            return;
-        }
-
         setStatus("sending");
 
-        // Alterando a URL para usar o caminho do proxy
-        fetch('https://us-central1-projeto-arch-lambda-lfern.cloudfunctions.net/function-email-auth', {
+        fetch('/api', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

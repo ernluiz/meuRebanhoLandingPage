@@ -16,6 +16,12 @@ const ContactForm: React.FC = () => {
             return;
         }
 
+        const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!isValidEmail) {
+            alert("Por favor, insira um e-mail válido.");
+            return;
+        }
+
         setStatus("sending");
 
         fetch('/api', {

@@ -1,4 +1,3 @@
-import React from 'react';
 import "../styles/footer.css";
 import Imagem11 from "../assets/logo-techgold.png";
 

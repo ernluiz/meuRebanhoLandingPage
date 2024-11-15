@@ -16,10 +16,16 @@ const ContactForm: React.FC = () => {
             return;
         }
 
+        const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!isValidEmail) {
+            alert("Por favor, insira um e-mail válido.");
+            return;
+        }
+
         setStatus("sending");
 
         // Alterando a URL para usar o caminho do proxy
-        fetch('/api', {
+        fetch('https://us-central1-projeto-arch-lambda-lfern.cloudfunctions.net/function-email-auth', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -33,10 +39,10 @@ const ContactForm: React.FC = () => {
             .then((response) => {
                 if (!response.ok) throw new Error("Erro ao enviar a mensagem");
 
-                return response.json(); // Convertendo a resposta para JSON
+                return response.json();
             })
             .then((data) => {
-                console.log("Resposta da função:", data); // Exibindo resposta da API
+                console.log("Resposta da função:", data);
                 setStatus("success");
                 setEmail("");
                 setMessage("");
